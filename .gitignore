@@ -31,6 +31,8 @@ assets/app.html
 *.key
 *.keystore
 *.jks
+credentials.json
+credentials/
 google-services.json
 GoogleService-Info.plist
 
