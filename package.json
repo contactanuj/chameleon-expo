@@ -28,6 +28,7 @@
   },
   "scripts": {
     "build:html": "node build.js",
+    "eas-build-post-install": "node build.js",
     "test": "node tests/engine.test.js && node tests/bots.test.js && node tests/ui.test.js",
     "test:engine": "node tests/engine.test.js",
     "test:bots": "node tests/bots.test.js",

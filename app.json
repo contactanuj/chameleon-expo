@@ -27,14 +27,11 @@
       "bundleIdentifier": "com.chameleon.passandplay",
       "supportsTablet": false
     },
-    "plugins": [
-      [
-        "react-native-webview",
-        {
-          "allowFileAccessFromFileURLs": true,
-          "allowUniversalAccessFromFileURLs": true
-        }
-      ]
-    ]
+    "extra": {
+      "eas": {
+        "projectId": "94756f01-89ab-412c-bde8-1c75a1390763"
+      }
+    },
+    "owner": "snyperdrydan"
   }
 }
