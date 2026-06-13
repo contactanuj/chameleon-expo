@@ -1,0 +1,18 @@
+# Normalise line endings: treat everything as text with LF in the repo.
+* text=auto eol=lf
+
+# Scripts that may be run on Windows keep CRLF locally if needed.
+*.ps1 text eol=crlf
+
+# Binary assets
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.apk binary
+*.aab binary
+*.keystore binary
+
+# Generated/large inlined asset — collapse in diffs
+assets/ch-art.js linguist-generated=true

@@ -1,0 +1,38 @@
+name: Bug report
+description: Something isn't working as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for the report! Please fill in the details below.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug, and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Start a game with …
+        2. …
+        3. See the issue
+    validations:
+      required: true
+  - type: input
+    id: config
+    attributes:
+      label: Game configuration
+      description: Players, edition, bots, voting mode, etc. (anything non-default)
+  - type: input
+    id: device
+    attributes:
+      label: Device / OS / app version
+      placeholder: e.g. Pixel 7, Android 14, v1.0.0
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?

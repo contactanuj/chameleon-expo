@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: Tests + build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # The test suites and the HTML build use only Node's standard library,
+      # so no dependency install is needed here — keeps CI fast and hermetic.
+      - name: Engine tests
+        run: node tests/engine.test.js
+
+      - name: Bot tests
+        run: node tests/bots.test.js
+
+      - name: UI tests (headless) + info-leak guards
+        run: node tests/ui.test.js
+
+      - name: Build app.html
+        run: node build.js

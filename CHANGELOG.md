@@ -1,0 +1,29 @@
+# Changelog
+
+All notable changes to this project are documented here. The format is based on
+[Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project adheres
+to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [1.0.0] - 2026-06-14
+
+### Added
+- Pass-and-play game of The Chameleon for one device (Expo + WebView).
+- **Word edition** and **Picture edition** (bundled OpenMoji illustrations) plus a
+  **Mixed** mode and on-device **custom topics**.
+- Pure, deterministic, unit-tested rules engine (`ch-engine.js`).
+- Full round flow: private reveal, clues, debate, voting, the catch, the Chameleon's
+  guess, and optional scoring to a configurable target.
+- **Bots** (`ch-bots.js`): offline, deterministic seat-fillers / solo practice with
+  easy/medium/hard difficulty; curated clue knowledge for every built-in topic.
+- Extensive configuration with live validation: players, Chameleon count, clue/debate
+  phases, hide-grid (7–8 player) variant, voting modes (table/open/secret),
+  tie-breakers (capped re-vote), guesses (auto two at three players), scoring values,
+  dealer rotation, optional clue/debate timers, grid coordinates.
+- Safe-area handling so the status bar / notch never overlaps the content.
+- Test suites: engine fuzzing, bot clue-invariant + competence, and a headless UI
+  drive with information-leak regression guards.
+
+[Unreleased]: https://github.com/osahub/chameleon-expo/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/osahub/chameleon-expo/releases/tag/v1.0.0

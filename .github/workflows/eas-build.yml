@@ -1,0 +1,38 @@
+name: EAS Build (Android APK)
+
+# Manual, opt-in build. Requires a repository secret named EXPO_TOKEN
+# (Settings → Secrets and variables → Actions). Never commit the token itself.
+on:
+  workflow_dispatch:
+    inputs:
+      profile:
+        description: "EAS build profile"
+        required: true
+        default: preview
+        type: choice
+        options: [preview, production]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Set up EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Build app.html
+        run: npm run build:html
+
+      - name: EAS build
+        run: eas build --platform android --profile ${{ inputs.profile }} --non-interactive --no-wait

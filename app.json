@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "The Chameleon",
+    "slug": "chameleon",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0c130d",
+    "androidStatusBar": {
+      "backgroundColor": "#0c130d",
+      "barStyle": "light-content",
+      "translucent": false
+    },
+    "splash": {
+      "backgroundColor": "#0c130d"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#0c130d"
+      },
+      "package": "com.chameleon.passandplay",
+      "softwareKeyboardLayoutMode": "pan"
+    },
+    "ios": {
+      "bundleIdentifier": "com.chameleon.passandplay",
+      "supportsTablet": false
+    },
+    "plugins": [
+      [
+        "react-native-webview",
+        {
+          "allowFileAccessFromFileURLs": true,
+          "allowUniversalAccessFromFileURLs": true
+        }
+      ]
+    ]
+  }
+}
