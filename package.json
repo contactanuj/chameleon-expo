@@ -1,7 +1,7 @@
 {
   "name": "chameleon",
   "version": "1.1.0",
-  "description": "The Chameleon — pass-and-play companion app (Word + Picture editions, fully configurable, with offline bots). Unofficial fan-made.",
+  "description": "The Chameleon - pass-and-play companion app (Word + Picture editions, fully configurable, with offline bots). Unofficial fan-made.",
   "main": "node_modules/expo/AppEntry.js",
   "license": "MIT",
   "author": "Anuj Pratap Singh <anujjadon98@gmail.com>",

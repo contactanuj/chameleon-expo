@@ -1,6 +1,6 @@
 /*
- * ch-art.js — GENERATED. Inline OpenMoji illustrations for the Picture edition.
- * Emoji artwork by OpenMoji (https://openmoji.org) — license CC BY-SA 4.0.
+ * ch-art.js - GENERATED. Inline OpenMoji illustrations for the Picture edition.
+ * Emoji artwork by OpenMoji (https://openmoji.org) - license CC BY-SA 4.0.
  * Regenerate with scripts/fetch-openmoji.js. Maps an emoji -> minified inline SVG;
  * cells without art fall back to the system emoji glyph.
  */

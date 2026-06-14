@@ -1,5 +1,5 @@
 /*
- * ch-engine.js — The Chameleon rules engine (pure, transport-agnostic).
+ * ch-engine.js - The Chameleon rules engine (pure, transport-agnostic).
  *
  * No DOM, no network. Deterministic given (config, topic, seed), so it can be:
  *   - unit-tested in Node by simulating full games (tests/engine.test.js),
@@ -12,7 +12,7 @@
  *
  * This is a DIGITAL adaptation: the app is the only source of truth. The physical
  * game's dice + code cards + topic-card coordinates exist only because paper can't
- * privately tell each player one word — the app does that directly by passing the
+ * privately tell each player one word - the app does that directly by passing the
  * device. So there are no dice/codes here: every non-Chameleon player simply sees
  * the secret word/picture; the Chameleon does not.
  *
@@ -41,12 +41,12 @@
 
   var OUTCOMES = {
     escaped_undetected: 'The Chameleon escaped undetected',
-    caught_guessed: 'Caught — but guessed the secret word and escaped',
-    caught_failed: 'Caught — and failed to guess the secret word'
+    caught_guessed: 'Caught - but guessed the secret word and escaped',
+    caught_failed: 'Caught - and failed to guess the secret word'
   };
 
   // ---------------------------------------------------------------------------
-  // Seeded PRNG (mulberry32) — deterministic + JSON-serializable via state.rngState.
+  // Seeded PRNG (mulberry32) - deterministic + JSON-serializable via state.rngState.
   // ---------------------------------------------------------------------------
   function nextRand(state) {
     var t = (state.rngState = (state.rngState + 0x6D2B79F5) >>> 0);
@@ -97,7 +97,7 @@
       // Roles
       chameleonCount: 1,          // official = 1; >1 is a harder house variant (team)
 
-      // Bots (optional, purely additive — botless games behave exactly as before).
+      // Bots (optional, purely additive - botless games behave exactly as before).
       // `bots[i] === true` makes seat i a computer player. botDifficulty: easy|medium|hard.
       bots: makeBots(pc, false),
       botDifficulty: 'medium',
@@ -126,7 +126,7 @@
       scoreCaughtGuessed: 1,      // Chameleon caught but guesses the word
       scoreCaughtFailed: 2,       // everyone else, when the Chameleon is caught and fails
 
-      // Timers (seconds; 0 = off). Non-binding — they add party-game pressure but
+      // Timers (seconds; 0 = off). Non-binding - they add party-game pressure but
       // never force a transition. The clue timer emulates the box's sand timer for
       // thinking of your word; the debate timer keeps the argument from dragging.
       clueTimer: 0,
@@ -150,7 +150,7 @@
 
     var pc = c.playerCount;
     if (!(pc >= 2)) errors.push('You need at least 2 players.');
-    else if (pc < 3) warnings.push('The Chameleon is best with 3 or more players — 2 is barely a game.');
+    else if (pc < 3) warnings.push('The Chameleon is best with 3 or more players - 2 is barely a game.');
 
     // Names: one per player, non-empty, unique-ish.
     var names = c.playerNames || [];
@@ -162,14 +162,14 @@
       var nm = (names[i] || '').trim();
       if (!nm) { errors.push('Every player needs a name (player ' + (i + 1) + ' is blank).'); continue; }
       var key = nm.toLowerCase();
-      if (seen[key]) warnings.push('Duplicate name "' + nm + '" — players may be hard to tell apart.');
+      if (seen[key]) warnings.push('Duplicate name "' + nm + '" - players may be hard to tell apart.');
       seen[key] = true;
     }
 
     // Chameleon count.
     var cc = c.chameleonCount;
     if (!(cc >= 1)) errors.push('There must be at least 1 Chameleon.');
-    else if (pc >= 2 && cc >= pc) errors.push('The Chameleon(s) cannot be every player — leave at least one in the know.');
+    else if (pc >= 2 && cc >= pc) errors.push('The Chameleon(s) cannot be every player - leave at least one in the know.');
     else if (cc > 1) {
       warnings.push('More than one Chameleon is a house variant (they form a team). Balance is untested.');
       if (cc > Math.floor(pc / 2)) warnings.push('With ' + cc + ' Chameleons and only ' + pc + ' players, the informed players are outnumbered.');
@@ -184,7 +184,7 @@
       if (avail.length === 0) {
         errors.push('No topics match your selection (edition / categories / custom). Enable more topics or change the edition.');
       } else if (avail.length < 3) {
-        warnings.push('Only ' + avail.length + ' topic(s) match your selection — rounds will repeat quickly.');
+        warnings.push('Only ' + avail.length + ' topic(s) match your selection - rounds will repeat quickly.');
       }
     }
 
@@ -202,7 +202,7 @@
         errors.push('Point values cannot be negative.');
       }
       if (c.scoreEscape === 0 && c.scoreCaughtGuessed === 0 && c.scoreCaughtFailed === 0) {
-        warnings.push('All point values are 0 — nobody can ever win the match.');
+        warnings.push('All point values are 0 - nobody can ever win the match.');
       }
     }
 
@@ -220,14 +220,14 @@
     if (anyBots(c)) {
       var botCount = 0, humanCount = 0;
       for (var bi = 0; bi < pc; bi++) { if (isBotSeat(c, bi)) botCount++; else humanCount++; }
-      if (humanCount === 0) warnings.push('No human players — the app will just play itself. Add at least one human.');
-      if (!c.cluePhase) warnings.push('Bots reason from the clues — with the clue phase off they have nothing to go on (they\'ll vote at random). Turn the clue phase on for bot games.');
+      if (humanCount === 0) warnings.push('No human players - the app will just play itself. Add at least one human.');
+      if (!c.cluePhase) warnings.push('Bots reason from the clues - with the clue phase off they have nothing to go on (they\'ll vote at random). Turn the clue phase on for bot games.');
       if (library) {
         var botTopics = availableTopics(c, library).filter(function (t) { return t.botClues && t.botClues.length; });
         if (botTopics.length === 0) {
           errors.push('Bots have no clue knowledge for any selected topic. Include a bot-supported category/topic, or turn bots off.');
         } else if (botTopics.length < 3) {
-          warnings.push('Only ' + botTopics.length + ' bot-supported topic(s) match your selection — bot rounds will repeat. Bots only know the curated topics.');
+          warnings.push('Only ' + botTopics.length + ' bot-supported topic(s) match your selection - bot rounds will repeat. Bots only know the curated topics.');
         }
       }
     }
@@ -360,7 +360,7 @@
     state.winnerIds = null;
     state.phase = 'reveal';
 
-    pushLog(state, 'Round ' + state.round + ' — ' + nameOf(state, state.dealerId) + ' deals. Topic: ' +
+    pushLog(state, 'Round ' + state.round + ' - ' + nameOf(state, state.dealerId) + ' deals. Topic: ' +
       topic.name + ' (' + topic.type + ').');
     return state;
   }
@@ -531,8 +531,8 @@
   // Resolve leaders -> a single accused (or a tie outcome) and move on.
   function finishVote(state, leaders) {
     if (leaders.length === 0) {
-      // Degenerate (no votes at all) — treat as an unsuccessful accusation.
-      return concludeRound(state, null, 'escaped_undetected', 'No accusation was made — the Chameleon escapes.');
+      // Degenerate (no votes at all) - treat as an unsuccessful accusation.
+      return concludeRound(state, null, 'escaped_undetected', 'No accusation was made - the Chameleon escapes.');
     }
 
     var accusedId;
@@ -547,18 +547,18 @@
         state.phase = 'vote';
         state.votes = {};
         state.lastVotes = { tally: null, leaders: leaders.slice(), manual: false, ballots: null, revote: true, revoteAmong: leaders.slice() };
-        pushLog(state, 'Tied vote — revote (' + state.revoteCount + ') among ' +
+        pushLog(state, 'Tied vote - revote (' + state.revoteCount + ') among ' +
           leaders.map(function (id) { return nameOf(state, id); }).join(', ') + '.');
         return state;
       }
       if (tb === 'chameleon_escapes') {
-        return concludeRound(state, null, 'escaped_undetected', 'Tied vote — no one was accused, the Chameleon escapes.');
+        return concludeRound(state, null, 'escaped_undetected', 'Tied vote - no one was accused, the Chameleon escapes.');
       }
       // 'dealer', or 'revote' exhausted: the dealer casts the deciding vote among
       // the tied players (using their own ballot if it points at one, else the first).
       var dealerVote = state.votes[state.dealerId];
       accusedId = (dealerVote && leaders.indexOf(dealerVote) !== -1) ? dealerVote : leaders[0];
-      pushLog(state, 'Tied vote — the dealer (' + nameOf(state, state.dealerId) + ') decides: ' + nameOf(state, accusedId) + '.');
+      pushLog(state, 'Tied vote - the dealer (' + nameOf(state, state.dealerId) + ') decides: ' + nameOf(state, accusedId) + '.');
     }
 
     state.accusedId = accusedId;
@@ -577,7 +577,7 @@
       return concludeRound(state, accusedId, 'escaped_undetected',
         nameOf(state, accusedId) + ' is NOT the Chameleon. The Chameleon escaped!');
     }
-    // Caught — the Chameleon takes a guess at the secret word.
+    // Caught - the Chameleon takes a guess at the secret word.
     state.guessesLeft = effectiveGuesses(state);
     state.guessHistory = [];
     state.phase = 'guess';
@@ -640,7 +640,7 @@
       if (leaders.atTarget.length > 0) {
         state.winnerIds = leaders.atTarget;
         state.phase = 'game_over';
-        pushLog(state, 'Match over — ' + leaders.atTarget.map(function (id) { return nameOf(state, id); }).join(', ') +
+        pushLog(state, 'Match over - ' + leaders.atTarget.map(function (id) { return nameOf(state, id); }).join(', ') +
           ' reached ' + c.winTarget + ' points.');
         return state;
       }

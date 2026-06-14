@@ -14,5 +14,5 @@
 *.aab binary
 *.keystore binary
 
-# Generated/large inlined asset — collapse in diffs
+# Generated/large inlined asset - collapse in diffs
 assets/ch-art.js linguist-generated=true

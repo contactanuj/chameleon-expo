@@ -1,5 +1,5 @@
 /*
- * ch-content.js — built-in topic library for The Chameleon.
+ * ch-content.js - built-in topic library for The Chameleon.
  *
  * A topic = { id, name, type:'word'|'picture', category, items:[16] }.
  *   - 'word'    topics are the classic Topic Cards (16 words in a 4x4 grid).
@@ -7,7 +7,7 @@
  *
  * Picture topics use emoji so the whole game stays a single inlined HTML file
  * (no binary assets). Each cell is just a string, so a future "bundled
- * illustration" set can drop in by replacing the emoji with <img>/SVG markup —
+ * illustration" set can drop in by replacing the emoji with <img>/SVG markup -
  * the engine and UI treat a cell as opaque content either way.
  *
  * Custom topics created in-app are stored separately (localStorage) and merged
@@ -211,7 +211,7 @@
   // for each cell (parallel to items). Bots draw clues from these, judge how
   // related a clue is to the secret (voting/guessing), and bluff as the Chameleon.
   // INVARIANT (asserted by the tests): no clue equals the secret itself or any
-  // OTHER item in the same topic — otherwise a clue would point at the wrong cell.
+  // OTHER item in the same topic - otherwise a clue would point at the wrong cell.
   // Topics without an entry here are simply not offered when bots are playing.
   // ---------------------------------------------------------------------------
   var BOT_CLUES = {

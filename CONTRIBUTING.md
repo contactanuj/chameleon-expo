@@ -6,12 +6,12 @@ codebase and contributions are welcome.
 ## Architecture (read this first)
 
 The whole game ships as a **single inlined `assets/app.html`** loaded into a WebView.
-You never edit `app.html` by hand — it is composed by `build.js` from source modules:
+You never edit `app.html` by hand - it is composed by `build.js` from source modules:
 
 | File | Role |
 |---|---|
 | `assets/styles.css` | styling (inlined `<style>`) |
-| `assets/ch-engine.js` | **pure** rules engine — no DOM, no network, deterministic (seeded RNG) |
+| `assets/ch-engine.js` | **pure** rules engine - no DOM, no network, deterministic (seeded RNG) |
 | `assets/ch-content.js` | built-in topic library + bot clue knowledge (`BOT_CLUES`) |
 | `assets/ch-art.js` | **generated** OpenMoji illustrations (see below) |
 | `assets/ch-bots.js` | **pure** offline bot decisions (clue / bluff / vote / guess) |
@@ -26,7 +26,7 @@ and could be reused by a future networked build.
 npm install        # only needed to run the Expo app (not for tests/build)
 ```
 
-Tests and the HTML build use **only Node's standard library** — no `npm install`
+Tests and the HTML build use **only Node's standard library** - no `npm install`
 required to run them.
 
 ## Develop, test, build
@@ -38,7 +38,7 @@ npm start              # build:html, then expo start
 npm run build:android  # build:html, then an EAS preview APK
 ```
 
-`assets/app.html` is a build artifact and is git-ignored — regenerate it with
+`assets/app.html` is a build artifact and is git-ignored - regenerate it with
 `npm run build:html`. `assets/ch-art.js` **is** committed (vendored OpenMoji art);
 regenerate it only when picture topics change, with `node scripts/fetch-openmoji.js`
 (needs network; Node 18+ for global `fetch`).
@@ -46,7 +46,7 @@ regenerate it only when picture topics change, with `node scripts/fetch-openmoji
 ## Non-negotiable invariants (the tests enforce these)
 
 1. **No hidden-info leaks.** The secret word/picture and who the Chameleon is must
-   never appear on a shared screen — only on the private per-player reveal and at
+   never appear on a shared screen - only on the private per-player reveal and at
    round-over. `tests/ui.test.js` has leak-regression guards.
 2. **Bot clue knowledge is clean.** In `BOT_CLUES`, no clue word may equal another
    item in the same topic (it would mislead deduction), and every built-in topic must

@@ -1,13 +1,13 @@
 /*
- * ch-bots.js — offline curated bot decisions for The Chameleon (pure, testable).
+ * ch-bots.js - offline curated bot decisions for The Chameleon (pure, testable).
  *
  * No DOM, no network, no LLM. Bots reason ONLY over the curated clue pools attached
  * to each topic (state.topic.botClues) + the clues recorded this round. Deterministic
  * given the state (seeded per game/round/bot), so bot games are unit-tested like the
- * engine. Bots are OPTIONAL and additive — botless play never calls this module.
+ * engine. Bots are OPTIONAL and additive - botless play never calls this module.
  *
  * Design goals (per the brief): competent & believable (not duds), but FAIR to a
- * human Chameleon — bots judge clues they can evaluate (pool membership) confidently,
+ * human Chameleon - bots judge clues they can evaluate (pool membership) confidently,
  * treat unfamiliar free-text clues as merely uncertain (not damning), and carry
  * difficulty-scaled randomness so a human bluffer can still escape.
  *
@@ -21,7 +21,7 @@
 })(typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : this), function () {
   'use strict';
 
-  // randomness per (game seed, round, bot) — independent of call order, so tests
+  // randomness per (game seed, round, bot) - independent of call order, so tests
   // are reproducible and a bot's choices don't shift when unrelated calls happen.
   function hashStr(s) {
     var h = 2166136261;

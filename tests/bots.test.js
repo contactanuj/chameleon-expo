@@ -1,13 +1,13 @@
 /*
- * bots.test.js — bot clue knowledge + offline bot decisions (ch-bots.js).
+ * bots.test.js - bot clue knowledge + offline bot decisions (ch-bots.js).
  *
  * Run: node tests/bots.test.js
  *
  * Covers:
- *   - BOT_CLUES integrity: parallel to items, non-empty, and the key INVARIANT —
+ *   - BOT_CLUES integrity: parallel to items, non-empty, and the key INVARIANT -
  *     no clue equals the secret itself or any OTHER item in the same topic.
  *   - decisions: clue picking, the suspicion model (competent AND fair), votes,
- *     guesses — all valid and sensible.
+ *     guesses - all valid and sensible.
  *   - "not duds": with a clearly-off Chameleon clue, bots catch it.
  *   - "fair": a perfect in-pool bluff is judged innocent (so a human can escape).
  *   - fuzz: hundreds of full all-bot and mixed bot+human matches terminate cleanly

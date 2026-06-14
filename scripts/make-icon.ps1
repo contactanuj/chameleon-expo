@@ -1,4 +1,4 @@
-# make-icon.ps1 — generates assets/icon.png (1024x1024) for The Chameleon.
+# make-icon.ps1 - generates assets/icon.png (1024x1024) for The Chameleon.
 # Clean, modern flat chameleon silhouette. Pure System.Drawing (GDI+), no tools.
 # Pick a palette with -Style A|B|C  (default B). Run: powershell -File scripts\make-icon.ps1 -Style B
 param([ValidateSet('A','B','C')][string]$Style = 'B')

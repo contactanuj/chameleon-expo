@@ -1,5 +1,5 @@
 /*
- * build.js — composes assets/app.html from the source modules.
+ * build.js - composes assets/app.html from the source modules.
  *
  *   assets/styles.css     -> inlined <style>
  *   assets/ch-engine.js   -> inlined <script> (pure rules engine; also unit-tested)

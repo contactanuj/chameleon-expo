@@ -24,4 +24,4 @@ We will acknowledge the report, investigate, and coordinate a fix and disclosure
 ## Secrets
 
 Never commit credentials. Build tokens (e.g. `EXPO_TOKEN`) belong in a local,
-git-ignored `.env` or in CI secrets — see `.env.example`.
+git-ignored `.env` or in CI secrets - see `.env.example`.

@@ -1,5 +1,5 @@
 /*
- * ui.test.js — headless smoke test for ui.js (the pass-and-play DOM layer).
+ * ui.test.js - headless smoke test for ui.js (the pass-and-play DOM layer).
  *
  * Run: node tests/ui.test.js
  *
@@ -7,8 +7,8 @@
  * touches (document.getElementById('app'), addEventListener, innerHTML, window,
  * localStorage, confirm). Then we drive the REAL action handlers through full
  * rounds via the window.__CHUI test hook. Every handler calls the real render(),
- * so if any screen — reveal, clues, debate, every voting mode, tally, guess,
- * round-over, game-over, rules, custom-topic editor, log — throws, this fails.
+ * so if any screen - reveal, clues, debate, every voting mode, tally, guess,
+ * round-over, game-over, rules, custom-topic editor, log - throws, this fails.
  */
 'use strict';
 
@@ -273,7 +273,7 @@ section('picture edition renders bundled OpenMoji illustrations');
 })();
 
 // ---------------------------------------------------------------------------
-section('solo vs bots (1 human + 3 bots) — full rounds, auto bot turns');
+section('solo vs bots (1 human + 3 bots) - full rounds, auto bot turns');
 (function () {
   function botAccused() { var a = G().accusedId, p = G().players.filter(function (x) { return x.id === a; })[0]; return p && p.isBot; }
   function firstWrong(s) { for (var i = 0; i < s.topic.items.length; i++) if (i !== s.secretIndex && s.guessHistory.indexOf(i) === -1) return i; return s.secretIndex; }

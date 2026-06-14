@@ -11,7 +11,7 @@ The Picture edition's illustrations in [`assets/ch-art.js`](assets/ch-art.js) ar
 - Project: <https://openmoji.org>
 - Source: <https://github.com/hfg-gmuend/openmoji>
 - License: **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**
-  — <https://creativecommons.org/licenses/by-sa/4.0/>
+  - <https://creativecommons.org/licenses/by-sa/4.0/>
 
 Per CC BY-SA 4.0 you must credit OpenMoji and share any adaptations of the OpenMoji
 artwork under the same license. The app credits OpenMoji on its "How to play" screen.

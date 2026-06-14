@@ -1,5 +1,5 @@
 /*
- * ui.js — pass-and-play UI for The Chameleon. Browser-only (uses the DOM).
+ * ui.js - pass-and-play UI for The Chameleon. Browser-only (uses the DOM).
  * Depends on the CH engine (window.CH) and the topic library (window.CH_CONTENT),
  * both inlined before this script by build.js.
  *
@@ -25,7 +25,7 @@
   var ui = {};         // transient per-screen UI state
   var timerHandle = null; // live countdown interval (debate/clue timers)
   var revealTimer = null;  // countdown that auto-hides a private secret/role reveal
-  var lastRenderKey = null; // view(+phase) of the last render — for scroll preservation
+  var lastRenderKey = null; // view(+phase) of the last render - for scroll preservation
 
   // ---- persistence -------------------------------------------------------
   function save() { try { if (G) localStorage.setItem(KEY, JSON.stringify(G)); } catch (e) {} }
@@ -160,11 +160,11 @@
   // ---- private reveal auto-hide (roles are always timer-based) -------------
   function clearRevealTimer() { if (revealTimer) { try { clearInterval(revealTimer); } catch (e) {} revealTimer = null; } }
   function revealSecs() { return (G && G.config && G.config.revealSeconds > 0) ? G.config.revealSeconds : 6; }
-  function countdownHtml() { return '<div class="note small center">Hiding in <b id="revealCount">' + revealSecs() + 's</b> — only you should see this</div>'; }
+  function countdownHtml() { return '<div class="note small center">Hiding in <b id="revealCount">' + revealSecs() + 's</b> - only you should see this</div>'; }
   function startRevealCountdown(onElapse) {
     if (typeof setInterval === 'undefined') return;
     var el = document.getElementById('revealCount');
-    if (!el) return; // headless / no DOM — manual "hide & pass" still works
+    if (!el) return; // headless / no DOM - manual "hide & pass" still works
     var secs = revealSecs();
     el.textContent = secs + 's';
     revealTimer = setInterval(function () {
@@ -199,7 +199,7 @@
       '<div class="center" style="padding-top:26px">',
       '<div style="font-size:54px;line-height:1">🦎</div>',
       '<h1>THE CHAMELEON</h1>',
-      '<p class="muted">Pass-and-play · one device · 3–8 players (2–12 supported)</p>',
+      '<p class="muted">Pass-and-play · one device · 3-8 players (2-12 supported)</p>',
       '</div>',
       '<div class="spacer"></div>',
       resume,
@@ -208,7 +208,7 @@
       '<button class="btn" data-action="customTopics">Custom topics</button>',
       '<button class="btn" data-action="rules">How to play</button>',
       '<div class="spacer"></div>',
-      '<p class="small muted center">A social bluffing game. Everyone gets the secret word — except the Chameleon, who must blend in. Word edition and Picture edition are both built in.</p>',
+      '<p class="small muted center">A social bluffing game. Everyone gets the secret word - except the Chameleon, who must blend in. Word edition and Picture edition are both built in.</p>',
       '<p class="tiny muted center">The Chameleon is a trademark of its publishers (Big Potato / Crown &amp; Andrews). This is an unofficial fan-made companion app.</p>'
     ].join('');
   }
@@ -282,9 +282,9 @@
       '<h3>Edition &amp; topics</h3>',
       '<label>Edition</label>',
       '<select data-cfg-select="edition">',
-      editionOption('word', 'Word edition — classic 16-word topics', draft.edition),
-      editionOption('picture', 'Picture edition — 16 emoji per grid', draft.edition),
-      editionOption('mixed', 'Mixed — draw from both', draft.edition),
+      editionOption('word', 'Word edition - classic 16-word topics', draft.edition),
+      editionOption('picture', 'Picture edition - 16 emoji per grid', draft.edition),
+      editionOption('mixed', 'Mixed - draw from both', draft.edition),
       '</select>',
       '<label>Categories to draw from</label>',
       renderCategoryChips(draft),
@@ -323,11 +323,11 @@
     return [
       '<label>Bot difficulty</label>',
       '<select data-cfg-select="botDifficulty">',
-      vOpt('easy', 'Easy — loose clues, easy to read', d.botDifficulty),
-      vOpt('medium', 'Medium — a solid, fair game', d.botDifficulty),
-      vOpt('hard', 'Hard — sharp clue-readers', d.botDifficulty),
+      vOpt('easy', 'Easy - loose clues, easy to read', d.botDifficulty),
+      vOpt('medium', 'Medium - a solid, fair game', d.botDifficulty),
+      vOpt('hard', 'Hard - sharp clue-readers', d.botDifficulty),
       '</select>',
-      '<p class="small muted">Bots give clues, vote, and guess if caught — they can\'t debate, so the table talk is still yours. Bots only play the built-in curated topics.</p>'
+      '<p class="small muted">Bots give clues, vote, and guess if caught - they can\'t debate, so the table talk is still yours. Bots only play the built-in curated topics.</p>'
     ].join('');
   }
 
@@ -353,25 +353,25 @@
       checkboxRow('Guide the clue phase (one word each, clockwise)', 'cluePhase', d.cluePhase),
       checkboxRow('Type each clue so the app can recap them', 'recordClues', d.recordClues),
       checkboxRow('Separate “discuss now” step before voting', 'debatePhase', d.debatePhase),
-      checkboxRow('Hide the grid during debate (7–8 player variant)', 'hideGridDuringDebate', d.hideGridDuringDebate),
+      checkboxRow('Hide the grid during debate (7-8 player variant)', 'hideGridDuringDebate', d.hideGridDuringDebate),
 
       '<div class="spacer"></div>',
       '<h3>Catching the Chameleon</h3>',
       '<label>How the table votes</label>',
       '<select data-cfg-select="votingMode">',
-      vOpt('table', 'Table — point at once, record who got the most', d.votingMode),
-      vOpt('open', 'Open — tap each player\'s vote on the shared screen', d.votingMode),
-      vOpt('secret', 'Secret — pass the device to vote privately', d.votingMode),
+      vOpt('table', 'Table - point at once, record who got the most', d.votingMode),
+      vOpt('open', 'Open - tap each player\'s vote on the shared screen', d.votingMode),
+      vOpt('secret', 'Secret - pass the device to vote privately', d.votingMode),
       '</select>',
       checkboxRow('Reveal who voted for whom (open/secret)', 'revealVotes', d.revealVotes),
       '<label>If the vote ties</label>',
       '<select data-cfg-select="tieBreaker">',
       vOpt('dealer', 'The dealer casts the deciding vote', d.tieBreaker),
       vOpt('revote', 'Re-vote among the tied players', d.tieBreaker),
-      vOpt('chameleon_escapes', 'No one is accused — the Chameleon escapes', d.tieBreaker),
+      vOpt('chameleon_escapes', 'No one is accused - the Chameleon escapes', d.tieBreaker),
       '</select>',
       stepperRow('Chameleon\'s guesses when caught', 'chameleonGuesses', d.chameleonGuesses, 1, 5),
-      checkboxRow('Two guesses with exactly 3 players (rulebook)' + (threeP ? ' — active' : ''), 'threePlayerTwoGuesses', d.threePlayerTwoGuesses),
+      checkboxRow('Two guesses with exactly 3 players (rulebook)' + (threeP ? ' - active' : ''), 'threePlayerTwoGuesses', d.threePlayerTwoGuesses),
 
       '<div class="spacer"></div>',
       '<h3>Scoring</h3>',
@@ -385,11 +385,11 @@
 
       '<div class="spacer"></div>',
       '<h3>Timers</h3>',
-      '<label>Clue timer (per player — like the box\'s sand timer)</label>',
+      '<label>Clue timer (per player - like the box\'s sand timer)</label>',
       timerSelect('clueTimer', d.clueTimer || 0, [0, 15, 30, 45, 60]),
       '<label>Debate timer</label>',
       timerSelect('debateTimer', d.debateTimer || 0, [0, 60, 90, 120, 180, 300]),
-      '<p class="small muted">Timers are a visible countdown only — they never force the round on.</p>',
+      '<p class="small muted">Timers are a visible countdown only - they never force the round on.</p>',
 
       '<div class="spacer"></div>',
       '<h3>Other</h3>',
@@ -399,7 +399,7 @@
       vOpt('clockwise', 'Pass clockwise', d.dealerRotation),
       vOpt('random', 'Random each round', d.dealerRotation),
       '</select>',
-      checkboxRow('Show A1–D4 grid coordinates (cosmetic)', 'showCoordinates', d.showCoordinates)
+      checkboxRow('Show A1-D4 grid coordinates (cosmetic)', 'showCoordinates', d.showCoordinates)
     ].join('');
   }
 
@@ -423,12 +423,12 @@
   }
 
   function stepperRow(label, path, val, min, max) {
-    // Disable −/+ at the bounds so the control itself enforces valid ranges
+    // Disable -/+ at the bounds so the control itself enforces valid ranges
     // (e.g. Chameleon count can't exceed what the player count allows).
     return [
       '<label>' + label + '</label>',
       '<div class="stepper" data-stepper="' + path + '" data-min="' + min + '" data-max="' + max + '">',
-      '<button data-step="-1"' + (val <= min ? ' disabled' : '') + '>−</button>',
+      '<button data-step="-1"' + (val <= min ? ' disabled' : '') + '>-</button>',
       '<div class="val">' + val + '</div>',
       '<button data-step="1"' + (val >= max ? ' disabled' : '') + '>+</button>',
       '</div>'
@@ -531,8 +531,8 @@
         '<div class="panel center">',
         '<h2>Pass the device around</h2>',
         '<p class="muted">Each player privately sees the secret ' + (G.topic.type === 'picture' ? 'picture' : 'word') +
-        ' — except the Chameleon. Hand the phone to the first player and don\'t let anyone else see the screen.' +
-        (gAnyBots() ? ' 🤖 Bots already know their role — you\'ll only pass for human players.' : '') + '</p>',
+        ' - except the Chameleon. Hand the phone to the first player and don\'t let anyone else see the screen.' +
+        (gAnyBots() ? ' 🤖 Bots already know their role - you\'ll only pass for human players.' : '') + '</p>',
         '<div class="note">Topic: <b>' + esc(G.topic.name) + '</b> · ' +
         (chamN === 1 ? 'there is <b>1 Chameleon</b>' : 'there are <b>' + chamN + ' Chameleons</b>') + ' among you.</div>',
         '<p class="small muted">' + dn(G.dealerId) + ' is the dealer and will start the clues.</p>',
@@ -548,7 +548,7 @@
         topbar('Secret reveal', ''),
         '<div class="panel center"><h2>Everyone\'s in</h2>',
         '<p class="muted">Put the device where everyone can see it. ' + dn(G.dealerId) +
-        ' starts — going clockwise, each player says one word linked to the secret ' +
+        ' starts - going clockwise, each player says one word linked to the secret ' +
         (G.topic.type === 'picture' ? 'picture' : 'word') + '.</p></div>',
         '<button class="btn primary" data-action="beginPlay">Start the round</button>'
       ].join('');
@@ -557,13 +557,13 @@
     var p = players[ui.revealIdx];
     if (!ui.revealShown && !ui.revealExpired) {
       return passScreen(p.name, 'Make sure only ' + esc(p.name) + ' can see the screen.',
-        'I am ' + esc(p.name) + ' — show me', 'revealShow');
+        'I am ' + esc(p.name) + ' - show me', 'revealShow');
     }
     if (ui.revealExpired) {
       return [
         topbar('Secret reveal', ''),
         '<div class="panel center"><div style="font-size:42px">🙈</div><h2>Hidden</h2>' +
-        '<p class="muted">Time\'s up — ' + esc(p.name) + '\'s secret is hidden again so no one else sees it.</p></div>',
+        '<p class="muted">Time\'s up - ' + esc(p.name) + '\'s secret is hidden again so no one else sees it.</p></div>',
         '<button class="btn" data-action="revealAgain">Show me again</button>',
         '<button class="btn primary" data-action="revealNext">Hide &amp; pass on</button>'
       ].join('');
@@ -576,7 +576,7 @@
     ].join('');
   }
 
-  // The private secret/role card — shared by the initial reveal and recheck.
+  // The private secret/role card - shared by the initial reveal and recheck.
   // ONLY ever rendered behind a pass-the-device gate; never on a shared screen.
   function privateSecretCard(playerId) {
     var info = CH.revealInfo(G, playerId);
@@ -589,10 +589,10 @@
         '<div class="lead">' + esc(nameOf(playerId)) + ', you are the</div>',
         '<div class="big">🦎 CHAMELEON</div>',
         '<div class="small">Blend in. You do NOT know the secret ' + (isPic ? 'picture' : 'word') +
-        ' — work it out from everyone\'s clues.</div>',
+        ' - work it out from everyone\'s clues.</div>',
         '</div>',
         allies,
-        '<p class="small muted center">Here is the full grid (everyone can see it). Pick a clue that could fit any of these — but not so vague you get caught.</p>',
+        '<p class="small muted center">Here is the full grid (everyone can see it). Pick a clue that could fit any of these - but not so vague you get caught.</p>',
         renderGrid(G.topic, { coords: G.config.showCoordinates })
       ].join('');
     }
@@ -604,7 +604,7 @@
       '<div class="rolecard know">',
       '<div class="lead">' + esc(nameOf(playerId)) + ', the secret ' + (isPic ? 'picture' : 'word') + ' is</div>',
       secretBox,
-      '<div class="small">Say a clue that proves you know it — but don\'t make it so obvious the Chameleon catches on.</div>',
+      '<div class="small">Say a clue that proves you know it - but don\'t make it so obvious the Chameleon catches on.</div>',
       '</div>',
       renderGrid(G.topic, { secretIndex: s.index, coords: G.config.showCoordinates })
     ].join('');
@@ -622,7 +622,7 @@
         topbar('Recheck secret', '<button class="iconbtn" data-action="recheckDone">Back</button>'),
         '<div class="panel">',
         '<h2>Recheck your secret</h2>',
-        '<p class="muted">Forgotten it? Pass the device to the player who needs it, then tap their name — only they should look. It hides again on a timer.</p>',
+        '<p class="muted">Forgotten it? Pass the device to the player who needs it, then tap their name - only they should look. It hides again on a timer.</p>',
         btns,
         '</div>'
       ].join('');
@@ -630,7 +630,7 @@
     var rp = CH.getPlayer(G, rc.playerId);
     if (rc.stage === 'gate') {
       return passScreen(rp.name, 'Make sure only ' + esc(rp.name) + ' can see the screen.',
-        'I am ' + esc(rp.name) + ' — show me', 'recheckShow');
+        'I am ' + esc(rp.name) + ' - show me', 'recheckShow');
     }
     if (rc.stage === 'expired') {
       return [
@@ -666,7 +666,7 @@
     var recapRows = '';
     if (entry) {
       var said = G.clueOrder.slice(0, G.clueIdx).map(function (id) {
-        return '<div class="kv"><span>' + dn(id) + '</span><span class="lime">' + esc(G.clues[id] || '—') + '</span></div>';
+        return '<div class="kv"><span>' + dn(id) + '</span><span class="lime">' + esc(G.clues[id] || '-') + '</span></div>';
       }).join('');
       if (said) recapRows = '<div class="panel tight"><h3>Clues so far</h3>' + said + '</div>';
     }
@@ -674,7 +674,7 @@
       var cls = i < G.clueIdx ? 'o done' : (i === G.clueIdx ? 'o now' : 'o');
       return '<span class="' + cls + '">' + dn(id) + (i < G.clueIdx ? ' ✓' : '') + '</span>';
     }).join('');
-    var nextLabel = (n >= total ? (G.config.debatePhase ? 'Done — to the debate' : 'Done — to the vote') : 'Next player');
+    var nextLabel = (n >= total ? (G.config.debatePhase ? 'Done - to the debate' : 'Done - to the vote') : 'Next player');
 
     var middle;
     if (bot) {
@@ -738,7 +738,7 @@
       return '<button class="btn' + (on ? ' lime' : ' ghost') + '" data-action="tablePick" data-arg="' + p.id + '">' + esc(p.name) + '</button>';
     }).join('');
     var count = Object.keys(ui.tablePick).filter(function (k) { return ui.tablePick[k]; }).length;
-    var hint = count > 1 ? '<p class="small warn">Tie of ' + count + ' players — resolved by your tie-break setting.</p>' : '';
+    var hint = count > 1 ? '<p class="small warn">Tie of ' + count + ' players - resolved by your tie-break setting.</p>' : '';
     return [
       '<div class="panel">',
       '<h2>Who is the Chameleon?</h2>',
@@ -752,11 +752,11 @@
 
   function renderSeqVote(secret) {
     var voter = G.players[ui.voteIdx];
-    if (!voter) return '<div class="panel center"><p class="muted">Tallying…</p></div>';
-    if (voter.isBot) return '<div class="panel center"><p class="muted">🤖 bots are voting…</p></div>'; // pumped past in practice
+    if (!voter) return '<div class="panel center"><p class="muted">Tallying...</p></div>';
+    if (voter.isBot) return '<div class="panel center"><p class="muted">🤖 bots are voting...</p></div>'; // pumped past in practice
     if (secret && ui.voterGate) {
       return passScreen(voter.name, 'Vote privately for who you think the Chameleon is.',
-        'I am ' + esc(voter.name) + ' — vote', 'voteReveal');
+        'I am ' + esc(voter.name) + ' - vote', 'voteReveal');
     }
     var btns = G.players.filter(function (p) { return p.id !== voter.id; }).map(function (p) {
       return '<button class="btn ghost" data-action="seqVote" data-arg="' + p.id + '">' + dn(p.id) + '</button>';
@@ -764,7 +764,7 @@
     return [
       '<div class="panel">',
       '<h2>' + esc(voter.name) + ', who is the Chameleon?</h2>',
-      '<p class="muted">' + (secret ? 'No peeking — ' : 'Everyone can see — ') + 'tap your suspect.</p>',
+      '<p class="muted">' + (secret ? 'No peeking - ' : 'Everyone can see - ') + 'tap your suspect.</p>',
       btns,
       '<p class="small muted center">' + (ui.voteIdx + 1) + ' of ' + G.players.length + ' voting</p>',
       '</div>'
@@ -777,7 +777,7 @@
     if (G.lastVotes && !G.lastVotes.manual && G.config.revealVotes && G.lastVotes.ballots) {
       var rows = G.players.map(function (p) {
         var s = G.lastVotes.ballots[p.id];
-        return '<div class="kv"><span>' + dn(p.id) + '</span><span class="muted">→ ' + (s ? dn(s) : '—') + '</span></div>';
+        return '<div class="kv"><span>' + dn(p.id) + '</span><span class="muted">→ ' + (s ? dn(s) : '-') + '</span></div>';
       }).join('');
       votesBlock = '<div class="panel tight"><h3>How everyone voted</h3>' + rows + '</div>';
     }
@@ -796,7 +796,7 @@
   function renderGuess() {
     var what = (G.topic.type === 'picture' ? 'picture' : 'word');
     var head = '<div class="banner cham"><h1 style="margin:0;color:var(--lime)">CAUGHT! 🦎</h1>' +
-      '<p class="muted" style="margin:8px 0 0">' + dn(G.accusedId) + ' is the Chameleon — but can still escape.</p></div>';
+      '<p class="muted" style="margin:8px 0 0">' + dn(G.accusedId) + ' is the Chameleon - but can still escape.</p></div>';
     if (isBotId(G.accusedId)) {
       return [
         head,
@@ -897,7 +897,7 @@
         '<span class="tag">' + esc(catLabel(t.category)) + '</span><span class="small muted">' + t.items.length + ' items</span></span>' +
         '<button class="iconbtn" data-action="editCustom" data-arg="' + i + '">Edit</button> ' +
         '<button class="iconbtn" data-action="deleteCustom" data-arg="' + i + '">✕</button></div>';
-    }).join('') : '<p class="small muted">No custom topics yet. Make your own word list or emoji grid — like the dry-wipe custom card.</p>';
+    }).join('') : '<p class="small muted">No custom topics yet. Make your own word list or emoji grid - like the dry-wipe custom card.</p>';
     return [
       topbar('Custom topics', '<button class="iconbtn" data-action="' + (view === 'custom' && G ? 'backToGame' : 'home') + '">Back</button>'),
       '<div class="panel"><div class="players">' + rows + '</div></div>',
@@ -911,8 +911,8 @@
       return '<option value="' + c + '"' + (d.category === c ? ' selected' : '') + '>' + esc(catLabel(c)) + '</option>';
     }).join('');
     var placeholder = d.type === 'picture'
-      ? 'One emoji per line, e.g.\n🐘\n🦊\n🐢\n…  (aim for 16)'
-      : 'One word per line, e.g.\nPizza\nPasta\nEggs\n…  (aim for 16)';
+      ? 'One emoji per line, e.g.\n🐘\n🦊\n🐢\n...  (aim for 16)'
+      : 'One word per line, e.g.\nPizza\nPasta\nEggs\n...  (aim for 16)';
     var count = parseItems(d.itemsText, d.type).length;
     return [
       topbar(d.index == null ? 'New topic' : 'Edit topic', '<button class="iconbtn" data-action="customTopics">Cancel</button>'),
@@ -926,7 +926,7 @@
       '</select>',
       '<label>Category</label>',
       '<select data-cfg-select="customCat">' + catOpts + '</select>',
-      '<label>Items (' + count + ' — aim for 16)</label>',
+      '<label>Items (' + count + ' - aim for 16)</label>',
       '<textarea id="ctItems" rows="9" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#0a110b;color:var(--text);font-size:15px" placeholder="' + esc(placeholder) + '">' + esc(d.itemsText) + '</textarea>',
       '</div>',
       renderCustomValidation(d),
@@ -944,8 +944,8 @@
     var errs = [], warns = [];
     if (!d.name.trim()) errs.push('Give the topic a name.');
     if (items.length < 4) errs.push('Add at least 4 items (16 is ideal for a 4×4 grid).');
-    if (items.length >= 4 && items.length < 16) warns.push('Only ' + items.length + ' items — 16 fills a 4×4 grid best.');
-    if (items.length > 16) warns.push(items.length + ' items — more than 16 still works, it just makes a taller grid.');
+    if (items.length >= 4 && items.length < 16) warns.push('Only ' + items.length + ' items - 16 fills a 4×4 grid best.');
+    if (items.length > 16) warns.push(items.length + ' items - more than 16 still works, it just makes a taller grid.');
     var out = [];
     errs.forEach(function (e) { out.push('<div class="err">⛔ ' + esc(e) + '</div>'); });
     warns.forEach(function (w) { out.push('<div class="warn">⚠ ' + esc(w) + '</div>'); });
@@ -1023,14 +1023,14 @@
       case 'startVote': CH.beginVote(G); ui.tablePick = {}; ui.voteIdx = 0; ui.voterGate = true; if (gAnyBots()) { pumpVotes(); } else { save(); render(); } break;
       case 'restartTimer': render(); break;
 
-      // voting — table
+      // voting - table
       case 'tablePick': { if (!ui.tablePick) ui.tablePick = {}; ui.tablePick[arg] = !ui.tablePick[arg]; render(); break; }
       case 'tableConfirm': {
         var ids = Object.keys(ui.tablePick).filter(function (k) { return ui.tablePick[k]; });
         CH.resolveVotesManual(G, ids.length === 1 ? ids[0] : ids);
         afterVoteResolve(); break;
       }
-      // voting — open/secret
+      // voting - open/secret
       case 'voteReveal': ui.voterGate = false; render(); break;
       case 'seqVote': {
         var voter = G.players[ui.voteIdx];
@@ -1209,19 +1209,19 @@
     return [
       topbar('How to play', '<button class="iconbtn" data-action="backFromRules">Back</button>'),
       '<div class="panel"><h2>The idea</h2>',
-      '<p class="small">Everyone is shown the same secret word (or picture) from a grid — everyone except the <b>Chameleon</b>, who has no idea what it is. In turn, each player says <b>one word</b> linked to the secret. The Chameleon has to fake it convincingly and figure out the secret from everyone else\'s clues.</p></div>',
+      '<p class="small">Everyone is shown the same secret word (or picture) from a grid - everyone except the <b>Chameleon</b>, who has no idea what it is. In turn, each player says <b>one word</b> linked to the secret. The Chameleon has to fake it convincingly and figure out the secret from everyone else\'s clues.</p></div>',
       '<div class="panel"><h2>Each round</h2>',
-      '<p class="small">1. <b>Reveal:</b> pass the device so each player privately sees the secret word — or learns they\'re the Chameleon.</p>',
+      '<p class="small">1. <b>Reveal:</b> pass the device so each player privately sees the secret word - or learns they\'re the Chameleon.</p>',
       '<p class="small">2. <b>Clues:</b> clockwise from the dealer, everyone says one related word. Too obvious and the Chameleon guesses it; too vague and you look guilty.</p>',
       '<p class="small">3. <b>Debate &amp; vote:</b> argue, then everyone points at who they think the Chameleon is.</p>',
-      '<p class="small">4. <b>Reveal:</b> if you accused the wrong person, the Chameleon escaped. If you caught them, they get a final chance — to guess the secret word.</p></div>',
+      '<p class="small">4. <b>Reveal:</b> if you accused the wrong person, the Chameleon escaped. If you caught them, they get a final chance - to guess the secret word.</p></div>',
       '<div class="panel"><h2>Winning &amp; scoring</h2>',
       '<p class="small">Chameleon escapes undetected: <b>Chameleon +2</b>. Caught but guesses the word: <b>Chameleon +1</b>. Caught and guesses wrong: <b>everyone else +2</b>. First to 5 points wins. (All values are configurable.)</p></div>',
       '<div class="panel"><h2>Variants built in</h2>',
-      '<p class="small">• <b>3 players:</b> the Chameleon gets two guesses.<br>• <b>7–8 players:</b> hide the grid during the debate to make the Chameleon\'s guess harder.<br>• <b>Word</b> and <b>Picture (emoji)</b> editions, plus your own <b>custom topics</b>.</p></div>',
+      '<p class="small">• <b>3 players:</b> the Chameleon gets two guesses.<br>• <b>7-8 players:</b> hide the grid during the debate to make the Chameleon\'s guess harder.<br>• <b>Word</b> and <b>Picture (emoji)</b> editions, plus your own <b>custom topics</b>.</p></div>',
       '<div class="panel"><h2>🤖 Bots</h2>',
-      '<p class="small">In setup, switch any seat to a <b>Bot</b> to fill empty seats or practice solo. Bots give clues, vote and guess — but they can\'t join the debate, so the best game is still all humans. Bots only play the built-in curated topics; pick a difficulty to taste.</p></div>',
-      '<p class="tiny muted center">Picture-edition artwork by <b>OpenMoji</b> — the open-source emoji project — licensed CC BY-SA 4.0.</p>',
+      '<p class="small">In setup, switch any seat to a <b>Bot</b> to fill empty seats or practice solo. Bots give clues, vote and guess - but they can\'t join the debate, so the best game is still all humans. Bots only play the built-in curated topics; pick a difficulty to taste.</p></div>',
+      '<p class="tiny muted center">Picture-edition artwork by <b>OpenMoji</b> - the open-source emoji project - licensed CC BY-SA 4.0.</p>',
       '<button class="btn primary" data-action="backFromRules">Got it</button>'
     ].join('');
   }

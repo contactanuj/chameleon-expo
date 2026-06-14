@@ -18,11 +18,11 @@ web-build/
 *.aab
 *.ipa
 
-# Generated build artifact — composed from the source modules by build.js.
+# Generated build artifact - composed from the source modules by build.js.
 # Regenerate with `npm run build:html` (the start/android/build scripts do this).
 assets/app.html
 
-# secrets & credentials — NEVER commit these
+# secrets & credentials - NEVER commit these
 .env
 .env.*
 !.env.example
