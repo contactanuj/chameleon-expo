@@ -363,6 +363,9 @@
       vOpt('open', 'Open - tap each player\'s vote on the shared screen', d.votingMode),
       vOpt('secret', 'Secret - pass the device to vote privately', d.votingMode),
       '</select>',
+      (dAnyBots() && d.votingMode === 'table'
+        ? '<p class="small warn">With bots in the game, voting uses tap-to-vote (an in-person table vote can\'t include bots).</p>'
+        : ''),
       checkboxRow('Reveal who voted for whom (open/secret)', 'revealVotes', d.revealVotes),
       '<label>If the vote ties</label>',
       '<select data-cfg-select="tieBreaker">',
@@ -1184,7 +1187,9 @@
     var avail = categoriesForEdition(draft.edition);
     if (!draft.categories) draft.categories = avail.slice();
     var i = draft.categories.indexOf(cat);
-    if (i === -1) draft.categories.push(cat); else draft.categories.splice(i, 1);
+    if (i === -1) { draft.categories.push(cat); }
+    else if (draft.categories.length > 1) { draft.categories.splice(i, 1); } // keep >=1 selected
+    // (deselecting the last category is ignored, so the chips always reflect reality)
     render();
   }
 

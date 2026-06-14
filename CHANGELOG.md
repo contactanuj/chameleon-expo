@@ -6,6 +6,14 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-06-14
+
+### Fixed
+- Category chips: deselecting the last category no longer silently reverts to "all" -
+  at least one category stays selected, so the chips always reflect what will be played.
+- Table voting now shows a note when bots are in the game (voting falls back to tap-to-vote,
+  since an in-person table vote can't include bots) instead of silently ignoring the setting.
+
 ## [1.2.0] - 2026-06-14
 
 ### Changed

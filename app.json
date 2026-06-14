@@ -2,7 +2,7 @@
   "expo": {
     "name": "The Chameleon",
     "slug": "chameleon",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
@@ -21,22 +21,22 @@
         "backgroundColor": "#0c130d"
       },
       "package": "com.chameleon.passandplay",
-      "versionCode": 3,
+      "versionCode": 4,
       "softwareKeyboardLayoutMode": "pan"
     },
     "ios": {
       "bundleIdentifier": "com.chameleon.passandplay",
       "supportsTablet": false
     },
-    "extra": {
-      "eas": {
-        "projectId": "44e8c8c1-d0d1-4873-af62-8cf986a03819"
-      }
-    },
-    "owner": "snyper-drydan",
     "plugins": [
       "expo-asset",
       "expo-status-bar"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "87fb0f00-76a3-480f-815c-7f22af58b424"
+      }
+    },
+    "owner": "snypers-team"
   }
 }
