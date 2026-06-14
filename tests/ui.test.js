@@ -344,5 +344,30 @@ section('timed reveal + recheck (private, never on a shared screen)');
 })();
 
 // ---------------------------------------------------------------------------
+section('setup respects the player count (config can never exceed it)');
+(function () {
+  // Inject a deliberately invalid draft, then let setup render normalize it.
+  var bad = CH.defaultConfig(4, names(4));
+  bad.chameleonCount = 9;          // impossible for 4 players
+  bad.playerCount = 4;
+  UI.setDraft(bad);
+  UI.setView('setup');
+  UI.handle('toggleAdvanced');     // triggers a real setup render -> normalizeDraft
+  var d = UI.state().draft;
+  ok(d.chameleonCount === 3, 'Chameleon count clamped to players-1 on render (' + d.chameleonCount + ')');
+  ok(d.bots.length === 4 && d.playerNames.length === 4, 'names and bots tracked to the player count');
+
+  // Reducing the player count must drag the Chameleon count down with it.
+  var d2 = CH.defaultConfig(8, names(8));
+  d2.chameleonCount = 5;
+  UI.setDraft(d2);
+  UI.setView('setup');
+  UI.handle('toggleAdvanced');
+  UI.state().draft.playerCount = 3;  // simulate the user lowering players
+  UI.handle('toggleAdvanced');       // re-render normalizes
+  ok(UI.state().draft.chameleonCount <= 2, 'lowering players lowers the Chameleon count to fit');
+})();
+
+// ---------------------------------------------------------------------------
 console.log('\n' + (fail === 0 ? 'ALL PASSED' : 'FAILURES PRESENT') + ': ' + pass + ' passed, ' + fail + ' failed.');
 process.exit(fail === 0 ? 0 : 1);

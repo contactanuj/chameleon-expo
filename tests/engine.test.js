@@ -72,9 +72,19 @@ section('content library integrity');
 // ---------------------------------------------------------------------------
 section('config defaults & validation');
 
-[3, 4, 5, 6, 7, 8].forEach(function (pc) {
+[3, 4, 5, 6, 7, 8, 9, 10, 11, 12].forEach(function (pc) {
   var v = CH.validateConfig(cfg(pc), LIB);
   ok(v.ok, pc + 'p default config validates (errors: ' + JSON.stringify(v.errors) + ')');
+});
+
+// Player-count integrity: Chameleon count must always stay 1 .. players-1, and the
+// engine must defensively clamp even a malformed config (never make everyone a Chameleon).
+[2, 3, 4, 6, 8, 12].forEach(function (pc) {
+  ok(!CH.validateConfig(cfg(pc, { chameleonCount: pc }), LIB).ok, pc + 'p: chameleonCount == players is rejected');
+  ok(!CH.validateConfig(cfg(pc, { chameleonCount: pc + 3 }), LIB).ok, pc + 'p: chameleonCount > players is rejected');
+  var s = CH.newGame(cfg(pc, { chameleonCount: pc + 5 }), LIB, pc * 13 + 1); // malformed on purpose
+  ok(s.chameleonIds.length === pc - 1, pc + 'p: engine clamps chameleons to players-1 (leaves a knower)');
+  ok(s.chameleonIds.length >= 1, pc + 'p: at least one Chameleon');
 });
 
 ok(!CH.validateConfig(cfg(4, { chameleonCount: 0 }), LIB).ok, 'zero Chameleons is an error');
@@ -365,7 +375,7 @@ var editions = ['word', 'picture', 'mixed'];
 var modes = ['table', 'open', 'secret'];
 var ties = ['dealer', 'revote', 'chameleon_escapes'];
 var combos = [];
-for (var pc = 3; pc <= 8; pc++) {
+for (var pc = 2; pc <= 12; pc++) {
   combos.push({ label: 'std' + pc, c: cfg(pc) });
 }
 editions.forEach(function (ed) {

@@ -324,10 +324,12 @@
 
     if (!firstRound) rotateDealer(state);
 
-    // Assign Chameleon(s).
+    // Assign Chameleon(s). Defensively clamp to 1 .. players-1 so a malformed
+    // config can never make everyone the Chameleon (always leave a knower).
     var bag = state.players.map(function (p) { return p.id; });
     shuffleInPlace(state, bag);
-    state.chameleonIds = bag.slice(0, Math.max(1, state.config.chameleonCount));
+    var cc = Math.max(1, Math.min((state.config.chameleonCount | 0) || 1, state.players.length - 1));
+    state.chameleonIds = bag.slice(0, cc);
 
     // Pick topic + secret cell.
     var topic = pickTopic(state, library);

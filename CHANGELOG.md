@@ -6,6 +6,20 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-06-14
+
+### Added
+- Greatly expanded the word library — 24 new topics (Vegetables, Breakfast, Desserts,
+  Fast Food, Birds, Bugs, Flowers, Trees, Landscapes, Mythical Creatures, Music Genres,
+  Dance Styles, Games, Hobbies, Accessories, Tools, Colours, Shapes, Gemstones, Camping,
+  Bathroom, Office, Body Organs, The Garden) — each with curated bot clue knowledge.
+  Now 46 word + 8 picture topics.
+
+### Changed
+- Hardened player-count/configuration integrity: the setup normalizes the draft on every
+  change so the Chameleon count always stays 1…players−1; the engine defensively clamps it
+  too. Engine fuzz now covers 2–12 players.
+
 ## [1.0.0] - 2026-06-14
 
 ### Added
@@ -25,5 +39,6 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Test suites: engine fuzzing, bot clue-invariant + competence, and a headless UI
   drive with information-leak regression guards.
 
-[Unreleased]: https://github.com/osahub/chameleon-expo/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/osahub/chameleon-expo/releases/tag/v1.0.0
+[Unreleased]: https://github.com/contactanuj/chameleon-expo/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/contactanuj/chameleon-expo/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/contactanuj/chameleon-expo/releases/tag/v1.0.0

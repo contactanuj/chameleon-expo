@@ -199,7 +199,7 @@
       '<div class="center" style="padding-top:26px">',
       '<div style="font-size:54px;line-height:1">🦎</div>',
       '<h1>THE CHAMELEON</h1>',
-      '<p class="muted">Pass-and-play · one device · 3–8 players</p>',
+      '<p class="muted">Pass-and-play · one device · 3–8 players (2–12 supported)</p>',
       '</div>',
       '<div class="spacer"></div>',
       resume,
@@ -225,12 +225,10 @@
       for (var k in saved) if (saved.hasOwnProperty(k)) base[k] = saved[k];
       if (pc) base.playerCount = pc;
       if (!base.playerNames) base.playerNames = CH.defaultNames(base.playerCount);
-      resizeNames(base);
     } else {
       base.categories = categoriesForEdition(base.edition);
     }
-    ensureCategories(base);
-    return base;
+    return normalizeDraft(base);
   }
 
   function ensureCategories(d) {
@@ -248,10 +246,22 @@
     d.bots.length = d.playerCount;
   }
 
+  // Keep the whole draft internally consistent with the player count, so an
+  // invalid configuration can never be created or persisted (the controls
+  // enforce the limits; nothing relies on the validation error alone).
+  function normalizeDraft(d) {
+    d.playerCount = Math.max(2, Math.min(12, d.playerCount | 0 || 4));
+    resizeNames(d); // names + bots tracked to the player count
+    var maxCham = Math.max(1, d.playerCount - 1);
+    d.chameleonCount = Math.max(1, Math.min(maxCham, d.chameleonCount | 0 || 1)); // 1 .. players-1
+    if (!(d.chameleonGuesses >= 1)) d.chameleonGuesses = 1;
+    ensureCategories(d);
+    return d;
+  }
+
   function renderSetup() {
     if (!draft) draft = newDraft(4);
-    resizeNames(draft);
-    ensureCategories(draft);
+    normalizeDraft(draft);
     var v = CH.validateConfig(draft, library());
     var adv = !!ui.advanced;
 
@@ -1080,6 +1090,7 @@
   }
 
   function startGame() {
+    normalizeDraft(draft);
     var v = CH.validateConfig(draft, library());
     if (!v.ok) { render(); return; }
     saveConfig();
@@ -1160,11 +1171,7 @@
     var cur = getPath(draft, path);
     var next = Math.max(min, Math.min(max, cur + delta));
     setPath(draft, path, next);
-
-    if (path === 'playerCount') {
-      resizeNames(draft);
-      if (draft.chameleonCount > draft.playerCount - 1) draft.chameleonCount = Math.max(1, draft.playerCount - 1);
-    }
+    normalizeDraft(draft); // re-assert player-count constraints after any change
     render();
   }
 
