@@ -6,6 +6,15 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-06-14
+
+### Changed
+- Upgraded to **Expo SDK 56** (React 19, React Native 0.85, react-native-webview 13.16),
+  clearing the high/critical dependency advisories. `App.js` reads the bundled HTML via
+  `expo-file-system/legacy` (the classic file API moved there in SDK 54+).
+- Removed `eas-cli` from devDependencies (invoked via `npx`); bumped CI actions to current
+  majors. Replaced all en/em dashes, minus signs and ellipses in the app + docs with plain ASCII.
+
 ## [1.1.0] - 2026-06-14
 
 ### Added
@@ -39,6 +48,7 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Test suites: engine fuzzing, bot clue-invariant + competence, and a headless UI
   drive with information-leak regression guards.
 
-[Unreleased]: https://github.com/contactanuj/chameleon-expo/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/contactanuj/chameleon-expo/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/contactanuj/chameleon-expo/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/contactanuj/chameleon-expo/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/contactanuj/chameleon-expo/releases/tag/v1.0.0
